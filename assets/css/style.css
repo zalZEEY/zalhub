@@ -1,0 +1,759 @@
+/* ============================================================
+   LinkHub — Premium Linktree-style
+   ============================================================ */
+
+/* ---------- Reset ----------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- Base ------------------------------------------ */
+:root {
+  --font: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+html { height: 100%; }
+
+body {
+  font-family: var(--font);
+  min-height: 100%;
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 10%,  #3b0764 0%, transparent 60%),
+    radial-gradient(ellipse 70% 50% at 80% 90%,  #1e3a5f 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 60% 30%,  #4c0519 0%, transparent 55%),
+    #0a0a0f;
+  background-attachment: fixed;
+  color: #f1f1f1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 56px 20px 72px;
+  overflow-x: hidden;
+}
+
+/* ---------- Decorative orbs ------------------------------- */
+.orb {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(80px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.45;
+}
+
+.orb-1 {
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, #7c3aed, transparent 70%);
+  top: -150px; left: -150px;
+  animation: drift1 18s ease-in-out infinite;
+}
+
+.orb-2 {
+  width: 420px; height: 420px;
+  background: radial-gradient(circle, #be185d, transparent 70%);
+  bottom: -100px; right: -120px;
+  animation: drift2 22s ease-in-out infinite;
+}
+
+.orb-3 {
+  width: 350px; height: 350px;
+  background: radial-gradient(circle, #1d4ed8, transparent 70%);
+  top: 40%; left: 55%;
+  animation: drift3 28s ease-in-out infinite;
+}
+
+@keyframes drift1 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(60px, 40px) scale(1.05); }
+  66%       { transform: translate(-30px, 60px) scale(0.95); }
+}
+@keyframes drift2 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  33%       { transform: translate(-50px, -40px) scale(1.08); }
+  66%       { transform: translate(40px, -60px) scale(0.92); }
+}
+@keyframes drift3 {
+  0%, 100% { transform: translate(0, 0) scale(1); }
+  50%       { transform: translate(-60px, 40px) scale(1.1); }
+}
+
+/* ---------- Page ------------------------------------------ */
+.page {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 440px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+
+/* ---------- Profile --------------------------------------- */
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: 12px;
+  text-align: center;
+  animation: slideDown 0.6s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Avatar ring */
+.avatar-wrap {
+  position: relative;
+  padding: 3px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #a855f7, #ec4899, #3b82f6);
+  box-shadow:
+    0 0 30px rgba(168, 85, 247, 0.5),
+    0 0 60px rgba(168, 85, 247, 0.2);
+  animation: pulse-ring 3s ease-in-out infinite;
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 30px rgba(168,85,247,0.5), 0 0 60px rgba(168,85,247,0.2); }
+  50%       { box-shadow: 0 0 40px rgba(168,85,247,0.7), 0 0 80px rgba(168,85,247,0.3); }
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  object-fit: cover;
+  display: block;
+  border: 3px solid #0a0a0f;
+}
+
+.name {
+  font-size: 1.45rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  color: #ffffff;
+  text-shadow: 0 0 30px rgba(168, 85, 247, 0.5);
+}
+
+.bio {
+  font-size: 0.88rem;
+  color: rgba(255, 255, 255, 0.55);
+  font-weight: 400;
+  letter-spacing: 0.01em;
+}
+
+/* ---------- Links nav ------------------------------------- */
+.links {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ---------- Button ---------------------------------------- */
+.btn {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 16px 20px;
+  text-decoration: none;
+  color: #f1f1f1;
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  outline: none;
+
+  /* Glassmorphism */
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow:
+    0 4px 24px rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  transition:
+    transform 0.2s cubic-bezier(0.22, 1, 0.36, 1),
+    background 0.2s ease,
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+/* Shine sweep on hover */
+.btn::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(105deg, transparent 40%, rgba(255,255,255,0.06) 50%, transparent 60%);
+  transform: translateX(-100%);
+  transition: transform 0.5s ease;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.btn:hover::before {
+  transform: translateX(100%);
+}
+
+/* Color glow on hover via CSS var set by JS */
+.btn:hover {
+  background: rgba(255, 255, 255, 0.11);
+  border-color: rgba(255, 255, 255, 0.22);
+  transform: translateY(-2px) scale(1.01);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15),
+    0 0 20px var(--glow, rgba(168, 85, 247, 0.2));
+}
+
+.btn:active {
+  transform: translateY(0) scale(0.99);
+  transition-duration: 0.08s;
+}
+
+.btn:focus-visible {
+  outline: 2px solid rgba(168, 85, 247, 0.8);
+  outline-offset: 3px;
+}
+
+/* ---------- Icon ------------------------------------------ */
+.btn-icon {
+  position: absolute;
+  left: 18px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.75);
+  flex-shrink: 0;
+  z-index: 2;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.btn:hover .btn-icon {
+  color: #ffffff;
+  transform: scale(1.1);
+}
+
+/* ---------- Label ----------------------------------------- */
+.btn-label {
+  flex: 1;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  padding: 0 28px;
+}
+
+/* ---------- Chevron (dropdown trigger) -------------------- */
+.btn-chevron {
+  position: absolute;
+  right: 18px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.4);
+  z-index: 2;
+  transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1), color 0.2s ease;
+}
+
+.btn-chevron svg { width: 16px; height: 16px; }
+
+.btn--trigger[aria-expanded="true"] .btn-chevron {
+  transform: rotate(180deg);
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* ---------- Dropdown wrapper ------------------------------ */
+.btn-dropdown {
+  width: 100%;
+  position: relative;
+}
+
+/* trigger button — sama persis dengan .btn */
+.btn--trigger {
+  width: 100%;
+  border: none;
+  cursor: pointer;
+  font-family: var(--font);
+}
+
+/* ---------- Dropdown menu --------------------------------- */
+.dropdown-menu {
+  width: 100%;
+  margin-top: 6px;
+  border-radius: 14px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.13);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+
+  /* animasi buka/tutup */
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    grid-template-rows 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.22s ease,
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.dropdown-menu > * { overflow: hidden; }
+
+.dropdown-menu.open {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: all;
+}
+
+/* ---------- Dropdown item --------------------------------- */
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 18px;
+  text-decoration: none;
+  color: #f1f1f1;
+  position: relative;
+  transition: background 0.15s ease;
+}
+
+.dropdown-item + .dropdown-item {
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+}
+
+.dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.dropdown-item:active {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.dropdown-item:focus-visible {
+  outline: 2px solid rgba(168, 85, 247, 0.8);
+  outline-offset: -2px;
+}
+
+.dropdown-item-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: rgba(255, 255, 255, 0.8);
+  transition: background 0.15s ease;
+}
+
+.dropdown-item-icon svg { width: 18px; height: 18px; }
+
+.dropdown-item:hover .dropdown-item-icon {
+  background: rgba(255, 255, 255, 0.15);
+}
+
+.dropdown-item-text {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.dropdown-item-text strong {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #f1f1f1;
+}
+
+.dropdown-item-text small {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.dropdown-item-arrow {
+  width: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.25);
+  transition: color 0.15s ease, transform 0.15s ease;
+}
+
+.dropdown-item-arrow svg { width: 100%; height: 100%; }
+
+.dropdown-item:hover .dropdown-item-arrow {
+  color: rgba(255, 255, 255, 0.6);
+  transform: translateX(3px);
+}
+
+/* ---------- Arrow ----------------------------------------- */
+.btn-arrow {
+  position: absolute;
+  right: 18px;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: rgba(255, 255, 255, 0.3);
+  z-index: 2;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.btn-arrow svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn:hover .btn-arrow {
+  color: rgba(255, 255, 255, 0.7);
+  transform: translateX(3px);
+}
+
+/* ---------- Ripple ---------------------------------------- */
+.ripple {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  transform: scale(0);
+  animation: ripple-anim 0.55s linear;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes ripple-anim {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ---------- Donate button --------------------------------- */
+.btn-donate {
+  background: linear-gradient(135deg, rgba(245,158,11,0.15) 0%, rgba(239,68,68,0.12) 100%);
+  border-color: rgba(245, 158, 11, 0.35);
+  /* ukuran lebih compact untuk di dalam profil */
+  padding: 10px 20px;
+  border-radius: 999px;
+  font-size: 0.82rem;
+  width: auto;
+  min-width: 160px;
+}
+
+.btn-donate:hover {
+  border-color: rgba(245, 158, 11, 0.65);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 20px rgba(245, 158, 11, 0.25);
+}
+
+.btn-donate .btn-icon {
+  position: static;
+  color: #f59e0b;
+}
+
+.btn-donate .btn-label {
+  padding: 0;
+}
+
+.btn-donate .btn-arrow {
+  position: static;
+  color: rgba(255, 255, 255, 0.3);
+}
+
+/* ---------- Modal backdrop -------------------------------- */
+.modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-backdrop[hidden] {
+  display: none;
+}
+
+/* ---------- Modal box ------------------------------------- */
+.modal {
+  position: relative;
+  background: #16162a;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  padding: 32px 24px 28px;
+  width: 100%;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.6);
+  animation: modalIn 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes modalIn {
+  from { opacity: 0; transform: scale(0.92) translateY(12px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* ---------- Modal close button ---------------------------- */
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.07);
+  color: rgba(255,255,255,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.modal-close svg { width: 16px; height: 16px; }
+
+.modal-close:hover {
+  background: rgba(255,255,255,0.14);
+  color: #fff;
+}
+
+.modal-close:focus-visible {
+  outline: 2px solid rgba(168, 85, 247, 0.8);
+  outline-offset: 2px;
+}
+
+/* ---------- Modal content --------------------------------- */
+.modal-icon {
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  background: linear-gradient(135deg, rgba(245,158,11,0.2), rgba(239,68,68,0.2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f59e0b;
+  margin-bottom: 2px;
+}
+
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #fff;
+  letter-spacing: -0.02em;
+}
+
+.modal-desc {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.modal-qr-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.modal-qr {
+  width: 100%;
+  max-width: 340px;
+  aspect-ratio: 1;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+  /* area scroll saat zoom melebihi ukuran kontainer */
+  overflow: auto;
+  touch-action: pan-x pan-y;
+  cursor: grab;
+}
+
+.modal-qr:active { cursor: grabbing; }
+
+.modal-qr img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 8px;
+  transform-origin: top left;
+  transition: transform 0.2s cubic-bezier(0.22, 1, 0.36, 1);
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* ---------- Zoom controls --------------------------------- */
+.zoom-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 999px;
+  padding: 6px 14px;
+}
+
+.zoom-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s ease, transform 0.1s ease;
+  flex-shrink: 0;
+}
+
+.zoom-btn svg { width: 16px; height: 16px; }
+
+.zoom-btn:hover { background: rgba(255,255,255,0.2); }
+.zoom-btn:active { transform: scale(0.9); }
+.zoom-btn:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.zoom-btn:focus-visible {
+  outline: 2px solid rgba(168, 85, 247, 0.8);
+  outline-offset: 2px;
+}
+
+.zoom-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: rgba(255,255,255,0.6);
+  min-width: 38px;
+  text-align: center;
+  font-family: var(--font);
+  letter-spacing: 0.03em;
+}
+
+.modal-note {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+}
+
+/* ---------- Ad wrappers ----------------------------------- */
+
+/* Wrapper umum: rata tengah, tidak overflow */
+.ad-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+/* Banner 320x50 — slim bar di bawah profil */
+.ad-wrap--slim {
+  max-width: 320px;
+  min-height: 50px;
+  margin: 4px 0 2px;
+  /* sedikit redup agar tidak terlalu 'pop' */
+  opacity: 0.92;
+}
+
+/* Native Banner — menyatu dengan konten */
+.ad-wrap--native {
+  width: 100%;
+  min-height: 60px;
+  margin: 4px 0;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  padding: 6px;
+}
+
+/* Banner 300x250 — medium rectangle di bawah link */
+.ad-wrap--rect {
+  max-width: 300px;
+  min-height: 250px;
+  margin: 4px 0;
+  border-radius: 14px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.07);
+  overflow: hidden;
+}
+
+/* Sembunyikan wrapper kosong agar tidak bikin gap */
+.ad-wrap:empty,
+.ad-wrap--native:empty,
+.ad-wrap--rect:empty {
+  display: none;
+}
+
+/* Di layar kecil, pastikan tidak overflow */
+@media (max-width: 340px) {
+  .ad-wrap--slim  { max-width: 100%; transform: scale(0.95); transform-origin: center; }
+  .ad-wrap--rect  { max-width: 100%; }
+}
+
+/* ---------- Footer ---------------------------------------- */
+.footer {
+  margin-top: 16px;
+  text-align: center;
+  animation: fadeIn 0.6s ease 0.8s both;
+}
+
+.footer p {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.2);
+  letter-spacing: 0.05em;
+}
+
+/* ---------- Animations ------------------------------------ */
+@keyframes slideDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ---------- Responsive ------------------------------------ */
+@media (max-width: 480px) {
+  body { padding: 40px 16px 56px; }
+  .btn { padding: 15px 18px; font-size: 0.9rem; border-radius: 14px; }
+  .orb { opacity: 0.3; }
+}
+
+/* ---------- Reduced motion -------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation: none !important;
+    transition-duration: 0.01ms !important;
+  }
+}

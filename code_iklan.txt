@@ -1,0 +1,84 @@
+1. Banner 468x60
+<script>
+  atOptions = {
+    'key' : '5a505e53c26e222566b6088eff529f66',
+    'format' : 'iframe',
+    'height' : 60,
+    'width' : 468,
+    'params' : {}
+  };
+</script>
+<script src="https://acceptableredheadcaviar.com/5a505e53c26e222566b6088eff529f66/invoke.js"></script>
+
+2. Banner 160x300
+<script>
+  atOptions = {
+    'key' : 'a76afc714e42b0cdd638016e16057ddb',
+    'format' : 'iframe',
+    'height' : 300,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://acceptableredheadcaviar.com/a76afc714e42b0cdd638016e16057ddb/invoke.js"></script>
+
+3. Banner 320x50
+<script>
+  atOptions = {
+    'key' : 'e5ec1671d9200ba5132470b2f883bcd8',
+    'format' : 'iframe',
+    'height' : 50,
+    'width' : 320,
+    'params' : {}
+  };
+</script>
+<script src="https://acceptableredheadcaviar.com/e5ec1671d9200ba5132470b2f883bcd8/invoke.js"></script>
+
+4. Banner 300x250
+<script>
+  atOptions = {
+    'key' : '387a406f891956563219fea52605bab3',
+    'format' : 'iframe',
+    'height' : 250,
+    'width' : 300,
+    'params' : {}
+  };
+</script>
+<script src="https://acceptableredheadcaviar.com/387a406f891956563219fea52605bab3/invoke.js"></script>
+
+5. Banner 160x600	
+<script>
+  atOptions = {
+    'key' : '3a12c89595cd31cb9e3d3f9471ddb2aa',
+    'format' : 'iframe',
+    'height' : 600,
+    'width' : 160,
+    'params' : {}
+  };
+</script>
+<script src="https://acceptableredheadcaviar.com/3a12c89595cd31cb9e3d3f9471ddb2aa/invoke.js"></script>
+
+6. Smartlink
+https://acceptableredheadcaviar.com/ztpm8z5550?key=c664e1f662c75340def8bba27f11e6cf
+
+7. Social Bar
+<script src="https://acceptableredheadcaviar.com/c9/4d/60/c94d607948fc721cfbae366920f0d2c3.js"></script>
+
+8. Banner 728x90
+<script>
+  atOptions = {
+    'key' : '91b5883c39dfc406fadc1c8c5710edbe',
+    'format' : 'iframe',
+    'height' : 90,
+    'width' : 728,
+    'params' : {}
+  };
+</script>
+<script src="https://acceptableredheadcaviar.com/91b5883c39dfc406fadc1c8c5710edbe/invoke.js"></script>
+
+9. Popunder
+<script src="https://acceptableredheadcaviar.com/d7/d3/9a/d7d39ac26c3fab46a2efe81a9d66c4d7.js"></script>
+
+10. Native Banner
+<script async="async" data-cfasync="false" src="https://acceptableredheadcaviar.com/1f8ab6caeb84ef96e3e90602067c0783/invoke.js"></script>
+<div id="container-1f8ab6caeb84ef96e3e90602067c0783"></div>
